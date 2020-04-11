@@ -4,10 +4,13 @@ import Answers from "./Answers.js";
 
 const Questions = (props) => {
   const renderQuestions = () => {
+    console.log("questions", props.user);
     return props.questions.map((q, i) => (
       <div key={"question" + i}>
         <h2>{q.question}</h2>
         <Answers
+          _id={q._id}
+          user={props.user}
           answers={q.answers}
           question={q.question}
           onVote={props.onVote}

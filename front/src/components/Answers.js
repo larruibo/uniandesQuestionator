@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 //import PropTypes from "prop-types";
 
-const Answers = props => {
+const Answers = (props) => {
   const formRef = useRef();
 
   const renderAnswers = () =>
@@ -23,20 +23,32 @@ const Answers = props => {
       </div>
     ));
 
-  const onVote = evt => {
+  const onVote = (evt) => {
     evt && evt.preventDefault();
 
     const formData = new FormData(formRef.current);
     const answer = formData.get("answer");
     props.onVote(props.question, answer);
   };
+  console.log("answers", props.user);
   return (
     <div className="Answers">
-      <form ref={formRef} onSubmit={onVote}>
+      <form
+        ref={formRef}
+        onSubmit={onVote}
+        action={`${props._id}/update`}
+        method="post"
+      >
         {renderAnswers()}
-        <button type="sumbit" className="my-3 btn btn-secondary">
-          Vote
-        </button>
+        {props.user ? (
+          <button type="sumbit" className="my-3 btn btn-secondary">
+            Vote {props._id}
+          </button>
+        ) : (
+          <button type="" className="my-3 btn btn-secondary" disabled>
+            Inicia sesión para responder
+          </button>
+        )}
       </form>
     </div>
   );
