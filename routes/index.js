@@ -44,6 +44,15 @@ router.post("/create", (req, res) => {
     mu.algo.insert(registro).then(res.redirect("/"));
 });
 
+//Endpoint findOne
+router.get("/questions/:id", (req, res) => {
+    const _id = req.params.id;
+
+    const query = { _id: new ObjectId(_id) };
+
+    mu.algo.findOne(query).then((record) => res.json(record));
+});
+
 //Endpoint updateOne
 router.post("/:id/update", (req, res) => {
     console.log("updateeee");

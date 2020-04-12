@@ -36,6 +36,13 @@ function MongoUtils() {
             return reportesCol.insertOne(grade).finally(() => client.close());
         });
 
+    //Find one document in db
+    mu.algo.findOne = (query) =>
+        mu.connect().then((client) => {
+            const algoCol = client.db(dbName).collection(colName);
+            return algoCol.findOne(query).finally(() => client.close());
+        });
+
     //Update a document
     mu.algo.updateOne = (algo, nuevo) =>
         mu.connect().then((client) => {
