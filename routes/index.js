@@ -23,7 +23,6 @@ router.get("/test2", function (req, res, next) {
 
 router.get("/getQuestions", function (req, res, next) {
     mu.algo.find().then((preguntas) => {
-        console.log(preguntas);
         return res.json(preguntas);
     });
 });
