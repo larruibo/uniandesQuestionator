@@ -6,18 +6,38 @@ const Answers = (props) => {
 
   const renderAnswers = () =>
     props.answers.map((a, i) => (
-      <div className="input-group" key={"answer" + a + props.question + i}>
-        <div className="input-group-prepend">
-          <div className="input-group-text">
-            <label>
-              <input
-                type="radio"
-                name="answer"
-                value={a.answer}
-                required={true}
-              />
-              {a.answer} <span>{a.votes}</span>
-            </label>
+      <div className="itemAnswer" key={"answer" + a + props.question + i}>
+        <div>
+          <p>
+            <b>{props.username}</b> respondió:{" "}
+          </p>
+        </div>
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <div className="input-group-text">
+              <label className="labelAnswer">
+                <input
+                  className="inputElement"
+                  type="radio"
+                  name="answer"
+                  value={a.answer}
+                  required={true}
+                />
+              </label>
+              <div className="answerElement">
+                <div className="row">
+                  <div className="col-10">
+                    <p>{a.answer}</p>
+                  </div>
+                  <div className="col-2">
+                    <p>
+                      <i class="fa fa-heart" />
+                      <span> {a.votes} likes </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

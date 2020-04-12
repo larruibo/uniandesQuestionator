@@ -71,7 +71,7 @@ const App = () => {
   const onCreateAnswer = (question, answer) => {
     console.log("dentro de app creating Answer ", question, answer);
     let newAnswers = [...question.answers];
-    newAnswers.push({ answer: answer, votes: 0 });
+    newAnswers.push({ answer: answer, votes: 0, username: user.username });
     question.answers = newAnswers;
     console.log(question.answers);
     setQuestion(question);
@@ -90,7 +90,9 @@ const App = () => {
 
       const qObj = newQuestions.find((q) => q.question === question);
       const newAnswers = qObj.answers.map((a) =>
-        a.answer === answer ? { answer: a.answer, votes: a.votes + 1 } : a
+        a.answer === answer
+          ? { answer: a.answer, votes: a.votes + 1, user: user.username }
+          : a
       );
       qObj.answers = newAnswers;
       fetch(`/${qObj._id}/update`, {
@@ -198,16 +200,19 @@ const App = () => {
       <div key={"question" + id}>
         {question ? (
           <div>
-            <h3>{question.question}</h3>
-            <p>
-              <b>{question.username}</b> preguntó el {question.timestamp}
-            </p>
-            <p>{question.descripcion}</p>
+            <div className="itemQuestion">
+              <h3>{question.question}</h3>
+              <p>
+                <b>{question.username}</b> preguntó el {question.timestamp}
+              </p>
+              <p>{question.descripcion}</p>
+            </div>
             <Answers
               _id={question._id}
               user={user}
               answers={question.answers}
               question={question.question}
+              username={question.username}
               onVote={onVote}
             />
             <FormCreateAnswer
@@ -223,49 +228,51 @@ const App = () => {
     );
   }
   return (
-    <div className="container">
-      <h1>Questionator!!!</h1>
-      <div className="row">
-        <div className="col-8">
-          <Router>
-            <div>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <Link to="/preguntas">Preguntas</Link>
-                </li>
-                <li>
-                  <Link to="/crearPregunta">Preguntar</Link>
-                </li>
-                <li>
-                  <Link to="/iniciarsesion">Iniciar Sesión</Link>
-                </li>
-              </ul>
+    <div className="container-fluid">
+      <div className="container info">
+        <h1>Questionator!!!</h1>
+        <div className="row">
+          <div className="col-12">
+            <Router>
+              <div>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li>
+                    <Link to="/preguntas">Preguntas</Link>
+                  </li>
+                  <li>
+                    <Link to="/crearPregunta">Preguntar</Link>
+                  </li>
+                  <li>
+                    <Link to="/iniciarsesion">Iniciar Sesión</Link>
+                  </li>
+                </ul>
 
-              <Switch>
-                <Route path="/about">
-                  <About />
-                </Route>
-                <Route path="/preguntas">
-                  <Preguntas />
-                </Route>
-                <Route path="/crearPregunta">
-                  <CrearPregunta />
-                </Route>
-                <Route path="/iniciarsesion">
-                  <IniciarSesion />
-                </Route>
-                <Route path="/">
-                  <Home />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
+                <Switch>
+                  <Route path="/about">
+                    <About />
+                  </Route>
+                  <Route path="/preguntas">
+                    <Preguntas />
+                  </Route>
+                  <Route path="/crearPregunta">
+                    <CrearPregunta />
+                  </Route>
+                  <Route path="/iniciarsesion">
+                    <IniciarSesion />
+                  </Route>
+                  <Route path="/">
+                    <Home />
+                  </Route>
+                </Switch>
+              </div>
+            </Router>
+          </div>
         </div>
       </div>
       <Footer />
