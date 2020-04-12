@@ -259,33 +259,70 @@ const App = () => {
   return (
     <div className="container-fluid">
       <div className="container info">
-        <h1>Questionator!!!</h1>
         <div className="row">
           <div className="col-12">
             <Router>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/about">About</Link>
-                  </li>
-                  <li>
-                    <Link to="/preguntas">Preguntas</Link>
-                  </li>
-                  <li>
-                    <Link to="/crearPregunta">Preguntar</Link>
-                  </li>
-                  <li>
-                    {!user ? (
-                      <Link to="/iniciarsesion"> Iniciar Sesión </Link>
-                    ) : (
-                      <Link to="/iniciarsesion"> Perfil </Link>
-                    )}
-                  </li>
-                </ul>
-
+              <nav
+                id="navbar"
+                className="navbar navbar-expand-lg navbar-dark bg-dark"
+              >
+                <a className="navbar-brand" href="#">
+                  PreguntAndes
+                </a>
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02"
+                  aria-controls="navbarTogglerDemo02"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <div className="row menu-navbar">
+                    <div className="col-12">
+                      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                          <Link className="nav-link" to="/">
+                            Home
+                          </Link>
+                        </li>
+                        <li class="nav-item">
+                          <Link className="nav-link" to="/about">
+                            About
+                          </Link>
+                        </li>
+                        <li class="nav-item">
+                          <Link className="nav-link" to="/preguntas">
+                            Preguntas
+                          </Link>
+                        </li>
+                        <li class="nav-item">
+                          <Link className="nav-link" to="/crearPregunta">
+                            Preguntar
+                          </Link>
+                        </li>
+                        <li class="nav-item menu-login">
+                          {!user ? (
+                            <Link className="nav-link" to="/iniciarsesion">
+                              {" "}
+                              Iniciar Sesión{" "}
+                            </Link>
+                          ) : (
+                            <Link className="nav-link" to="/iniciarsesion">
+                              {" "}
+                              Perfil{" "}
+                            </Link>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div className="contenido">
                 <Switch>
                   <Route path="/about">
                     <About />
