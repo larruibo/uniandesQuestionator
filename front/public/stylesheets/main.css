@@ -22,14 +22,14 @@
 }
 
 .blanco {
-  min-height: 20vh;
+  min-height: 18vh;
 }
 
 .extra {
   text-align: center;
   vertical-align: middle;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   padding-left: 4%;
   padding-right: 4%;
 }
@@ -73,6 +73,7 @@ textarea {
 .answerElement {
   width: 100%;
   margin-top: 0.5rem;
+  text-align: left;
 }
 
 .input-group-text {

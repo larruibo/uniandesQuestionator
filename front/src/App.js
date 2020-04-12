@@ -116,6 +116,24 @@ const App = () => {
       });
   };
 
+  const onLogin = (usrname, usrpassword) => {
+    const usr = { username: usrname, password: usrpassword };
+    fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usr),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          window.location = `/iniciarsesion`;
+          window.location.href = `/iniciarsesion`;
+        } else {
+          alert("error");
+        }
+      });
+  };
+
   const renderQuestions = (preguntas) => {};
 
   function Home() {
@@ -139,11 +157,22 @@ const App = () => {
     return (
       <div>
         {!user ? (
-          <Login />
+          <Login onLogin={onLogin} />
         ) : (
           <div>
-            Welcome! {user.username}
-            <button onClick={onLogout}>Logout</button>
+            <div>
+              <p>
+                Bienvenido! <b>{user.username}</b>
+              </p>
+              <p>
+                Ahora tienes total acceso y puedes preguntar, responder y votar.
+              </p>
+            </div>
+            <div className="form-group">
+              <button onClick={onLogout} className="btn btn-danger">
+                Logout
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -249,7 +278,11 @@ const App = () => {
                     <Link to="/crearPregunta">Preguntar</Link>
                   </li>
                   <li>
-                    <Link to="/iniciarsesion">Iniciar Sesión</Link>
+                    {!user ? (
+                      <Link to="/iniciarsesion"> Iniciar Sesión </Link>
+                    ) : (
+                      <Link to="/iniciarsesion"> Perfil </Link>
+                    )}
                   </li>
                 </ul>
 
