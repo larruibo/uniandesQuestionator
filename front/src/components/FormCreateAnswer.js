@@ -37,7 +37,7 @@ const FormCreateAnswer = (props) => {
               Responde!
             </button>
           ) : (
-            <button type="" className="btn btn-primary" disabled>
+            <button type="" className="btn btn-secondary" disabled>
               Inicia sesión para responder
             </button>
           )}

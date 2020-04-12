@@ -183,16 +183,18 @@ const App = () => {
     let match = useRouteMatch();
 
     return (
-      <div>
+      <div className="preguntas-section">
         <h2>Preguntas</h2>
-        <ul>
-          <Questions
-            user={user}
-            questions={questions}
-            onVote={onVote}
-            match={match}
-          />
-        </ul>
+        <div className="preguntas">
+          <div>
+            <Questions
+              user={user}
+              questions={questions}
+              onVote={onVote}
+              match={match}
+            />
+          </div>
+        </div>
 
         {/* The Topics page has its own <Switch> with more routes
           that build on the /topics URL path. You can think of the
@@ -266,7 +268,7 @@ const App = () => {
                 id="navbar"
                 className="navbar navbar-expand-lg navbar-dark bg-dark"
               >
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                   PreguntAndes
                 </a>
                 <button
@@ -278,33 +280,36 @@ const App = () => {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarTogglerDemo02"
+                >
                   <div className="row menu-navbar">
                     <div className="col-12">
-                      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
+                      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li className="nav-item">
                           <Link className="nav-link" to="/">
                             Home
                           </Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                           <Link className="nav-link" to="/about">
                             About
                           </Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                           <Link className="nav-link" to="/preguntas">
                             Preguntas
                           </Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                           <Link className="nav-link" to="/crearPregunta">
                             Preguntar
                           </Link>
                         </li>
-                        <li class="nav-item menu-login">
+                        <li className="nav-item menu-login">
                           {!user ? (
                             <Link className="nav-link" to="/iniciarsesion">
                               {" "}

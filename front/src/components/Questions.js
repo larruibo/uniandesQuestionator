@@ -14,11 +14,11 @@ const Questions = (props) => {
   const renderQuestions = () => {
     console.log("questions", props.user);
     return props.questions.map((q, i) => (
-      <li key={"question" + i}>
+      <div key={"question" + i}>
         <div>
           <Link to={`${props.match.url}/${q._id}`}>{q.question}</Link>
         </div>
-      </li>
+      </div>
     ));
   };
   return <div className="Questions">{renderQuestions()}</div>;

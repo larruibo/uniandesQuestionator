@@ -61,8 +61,8 @@ const Answers = (props) => {
       >
         {renderAnswers()}
         {props.user ? (
-          <button type="sumbit" className="my-3 btn btn-secondary">
-            Vote {props._id}
+          <button type="sumbit" className="my-3 btn btn-primary">
+            Vote
           </button>
         ) : (
           <button type="" className="my-3 btn btn-secondary" disabled>

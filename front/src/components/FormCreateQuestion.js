@@ -45,7 +45,7 @@ const FormCreateQuestion = (props) => {
               Pregunta!
             </button>
           ) : (
-            <button type="" className="btn btn-primary" disabled>
+            <button type="" className="btn btn-secondary" disabled>
               Inicia sesión para preguntar
             </button>
           )}
