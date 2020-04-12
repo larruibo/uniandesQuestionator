@@ -12,6 +12,7 @@ import Questions from "./components/Questions.js";
 import FormCreateQuestion from "./components/FormCreateQuestion.js";
 import Login from "./components/Login.js";
 import Answers from "./components/Answers.js";
+import FormCreateAnswer from "./components/FormCreateAnswer.js";
 let initialQuestions = [
   // {
   //   question: "Dummy?",
@@ -49,8 +50,39 @@ const App = () => {
       });
   }, []);
 
-  const onCreate = () => {
-    alert("creating");
+  const onCreateQuestion = (preg, descripcion) => {
+    console.log("dentro de onCreate", preg, descripcion);
+    const preguntita = { question: preg, descripcion: descripcion };
+    fetch("/create", {
+      method: "POST",
+      redirect: "follow",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(preguntita),
+    })
+      .then((res) => res.json())
+      .then((pregu) => {
+        console.log(pregu);
+        window.location = `/preguntas/${pregu[0]._id}`;
+        window.location.href = `/preguntas/${pregu[0]._id}`;
+        return setQuestion(pregu[0]);
+      });
+  };
+
+  const onCreateAnswer = (question, answer) => {
+    console.log("dentro de app creating Answer ", question, answer);
+    let newAnswers = [...question.answers];
+    newAnswers.push({ answer: answer, votes: 0 });
+    question.answers = newAnswers;
+    console.log(question.answers);
+    setQuestion(question);
+    fetch(`/${question._id}/createAnswer`, {
+      method: "POST",
+      redirect: "follow",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(question),
+    })
+      .then((res) => res.json())
+      .then((preg) => setQuestions(preg));
   };
   const onVote = (question, answer) => {
     setQuestions((prevQuestions) => {
@@ -61,7 +93,7 @@ const App = () => {
         a.answer === answer ? { answer: a.answer, votes: a.votes + 1 } : a
       );
       qObj.answers = newAnswers;
-      fetch(`${qObj._id}/update`, {
+      fetch(`/${qObj._id}/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(qObj),
@@ -96,7 +128,7 @@ const App = () => {
     return (
       <div>
         <h2>Preguntar: </h2>
-        <FormCreateQuestion user={user} onCreate={onCreate} />
+        <FormCreateQuestion user={user} onCreateQuestion={onCreateQuestion} />
       </div>
     );
   }
@@ -129,12 +161,6 @@ const App = () => {
             onVote={onVote}
             match={match}
           />
-          <li>
-            <Link to={`${match.url}/components`}>Components</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-          </li>
         </ul>
 
         {/* The Topics page has its own <Switch> with more routes
@@ -146,7 +172,7 @@ const App = () => {
             <Pregunta />
           </Route>
           <Route path={match.path}>
-            <h3>Please select a Pregunta.</h3>
+            <h3>Selecciona una pregunta para visualizarla.</h3>
           </Route>
         </Switch>
       </div>
@@ -169,16 +195,27 @@ const App = () => {
     findQuestion(id);
     console.log("Funciona coño", question);
     return (
-      <div>
-        <h3>Requested Pregunta ID: {id}</h3>
+      <div key={"question" + id}>
         {question ? (
-          <Answers
-            _id={question._id}
-            user={user}
-            answers={question.answers}
-            question={question.question}
-            onVote={onVote}
-          />
+          <div>
+            <h3>{question.question}</h3>
+            <p>
+              <b>{question.username}</b> preguntó el {question.timestamp}
+            </p>
+            <p>{question.descripcion}</p>
+            <Answers
+              _id={question._id}
+              user={user}
+              answers={question.answers}
+              question={question.question}
+              onVote={onVote}
+            />
+            <FormCreateAnswer
+              user={user}
+              onCreateAnswer={onCreateAnswer}
+              question={question}
+            />
+          </div>
         ) : (
           <div></div>
         )}

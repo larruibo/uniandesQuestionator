@@ -14,8 +14,8 @@ const Questions = (props) => {
   const renderQuestions = () => {
     console.log("questions", props.user);
     return props.questions.map((q, i) => (
-      <li>
-        <div key={"question" + i}>
+      <li key={"question" + i}>
+        <div>
           <Link to={`${props.match.url}/${q._id}`}>{q.question}</Link>
         </div>
       </li>

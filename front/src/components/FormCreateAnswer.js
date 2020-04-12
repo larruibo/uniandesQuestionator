@@ -3,21 +3,22 @@ import React, { useRef } from "react";
 const FormCreateAnswer = (props) => {
   const formRef = useRef();
 
-  const onAnswer = (evt) => {
+  const goCreateAnswer = (evt) => {
     evt && evt.preventDefault();
 
     const formData = new FormData(formRef.current);
     const answer = formData.get("answer");
-    props.onVote(props.question, answer);
+    console.log("dentro de goCreateAnswer");
+    props.onCreateAnswer(props.question, answer);
   };
   return (
     <div className="FormCreateAnswer">
       <form
         ref={formRef}
-        method="POST"
-        action="createAnswer"
+        onSumbit={goCreateAnswer}
+        method="post"
+        action={`/questions/${props.question._id}/createAnswer`}
         id="createAnswer"
-        onSumbit={onAnswer}
       >
         <label className="form-group">
           <span>Tu respuesta:</span>
@@ -28,7 +29,11 @@ const FormCreateAnswer = (props) => {
             required
           ></textarea>
           {props.user ? (
-            <button type="sumbit" className="btn btn-primary">
+            <button
+              type="button"
+              onClick={goCreateAnswer}
+              className="btn btn-primary"
+            >
               Responde!
             </button>
           ) : (

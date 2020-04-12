@@ -29,6 +29,17 @@ function MongoUtils() {
                 .finally(() => client.close());
         });
 
+    mu.algo.findLast = (query) =>
+        mu.connect().then((client) => {
+            const reportesCol = client.db(dbName).collection(colName);
+            return reportesCol
+                .find(query)
+                .limit(1)
+                .sort({ _id: -1 })
+                .toArray()
+                .finally(() => client.close());
+        });
+
     //Insert documents in DB
     mu.algo.insert = (grade) =>
         mu.connect().then((client) => {

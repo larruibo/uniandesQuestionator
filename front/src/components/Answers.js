@@ -36,7 +36,7 @@ const Answers = (props) => {
       <form
         ref={formRef}
         onSubmit={onVote}
-        action={`${props._id}/update`}
+        action={`questions/${props._id}/update`}
         method="post"
       >
         {renderAnswers()}
