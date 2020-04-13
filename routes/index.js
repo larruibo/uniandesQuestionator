@@ -27,6 +27,29 @@ router.get("/getQuestions", function (req, res, next) {
     });
 });
 
+router.get("/getQuestions/:query", function (req, res, next) {
+    const query = {
+        programa: new RegExp(`.*${req.params.query}.*`, "i"),
+    };
+    mu.algo.find(query).then((preguntas) => {
+        return res.json(preguntas);
+    });
+});
+
+router.get("/programas", function (req, res, next) {
+    mu.algo.getProgramas().then((programas) => {
+        return res.json(programas);
+    });
+});
+
+router.get("/materias/:id", function (req, res, next) {
+    const query = { _id: new ObjectId(req.params.id) };
+    console.log(query);
+    mu.algo.getMaterias(query).then((materias) => {
+        return res.json(materias);
+    });
+});
+
 //Endpoint CreateQuestion
 router.post("/create", (req, res) => {
     console.log("createeeee");

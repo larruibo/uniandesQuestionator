@@ -61,6 +61,25 @@ function MongoUtils() {
             return algoCol.updateOne(algo, nuevo).finally(() => client.close());
         });
 
+    mu.algo.getProgramas = () =>
+        mu.connect().then((client) => {
+            const reportesCol = client.db(dbName).collection("programas");
+            return reportesCol
+                .find()
+                .sort({ programa: -1 })
+                .toArray()
+                .finally(() => client.close());
+        });
+
+    mu.algo.getMaterias = (query) =>
+        mu.connect().then((client) => {
+            const reportesCol = client.db(dbName).collection("programas");
+            return reportesCol
+                .find(query)
+                .toArray()
+                .finally(() => client.close());
+        });
+
     mu.passport = {};
 
     mu.passport.register = (user) =>

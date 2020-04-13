@@ -14,6 +14,7 @@ import Login from "./components/Login.js";
 import Answers from "./components/Answers.js";
 import FormCreateAnswer from "./components/FormCreateAnswer.js";
 import FormCreateUser from "./components/FormCreateUser.js";
+import Filtro from "./components/Filtro.js";
 let initialQuestions = [
   // {
   //   question: "Dummy?",
@@ -198,12 +199,30 @@ const App = () => {
     );
   }
 
+  const filtrarPrograma = (filtro) => {
+    fetch(`/getQuestions/${filtro}`)
+      .then((res) => res.json())
+      .then((preg) => {
+        console.log(preg);
+        return setQuestions(preg);
+      });
+  };
+  const filtrarMateria = (filtro) => {
+    alert(filtro);
+  };
+
   function Preguntas() {
     let match = useRouteMatch();
 
     return (
       <div className="preguntas-section">
         <h2>Preguntas</h2>
+        <div className="Filtro">
+          <Filtro
+            filtrarPrograma={filtrarPrograma}
+            filtrarMateria={filtrarMateria}
+          />
+        </div>
         <div className="preguntas">
           <div>
             <Questions
