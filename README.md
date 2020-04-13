@@ -58,4 +58,4 @@ Luis Ruiz
 
 -----------------------------------------------------------
 # Licencia
-Para el proyecto se utilizo la sieguiente licencia [MIT Licence](https://raw.githubusercontent.com/jsmartinezn/mongo-explorer/master/LICENSE)
+Para el proyecto se utilizo la sieguiente licencia [MIT Licence](https://raw.githubusercontent.com/larruibo/uniandesQuestionator/master/LICENSE)
