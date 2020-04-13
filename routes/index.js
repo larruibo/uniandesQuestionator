@@ -36,6 +36,15 @@ router.get("/getQuestions/:query", function (req, res, next) {
     });
 });
 
+router.get("/getQuestions/materia/:query", function (req, res, next) {
+    const query = {
+        materia: new RegExp(`.*${req.params.query}.*`, "i"),
+    };
+    mu.algo.find(query).then((preguntas) => {
+        return res.json(preguntas);
+    });
+});
+
 router.get("/programas", function (req, res, next) {
     mu.algo.getProgramas().then((programas) => {
         return res.json(programas);

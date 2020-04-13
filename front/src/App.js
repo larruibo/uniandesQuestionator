@@ -52,9 +52,14 @@ const App = () => {
       });
   }, []);
 
-  const onCreateQuestion = (preg, descripcion) => {
-    console.log("dentro de onCreate", preg, descripcion);
-    const preguntita = { question: preg, descripcion: descripcion };
+  const onCreateQuestion = (programa, materia, preg, descripcion) => {
+    console.log("dentro de onCreate", programa, materia, preg, descripcion);
+    const preguntita = {
+      programa: programa,
+      materia: materia,
+      question: preg,
+      descripcion: descripcion,
+    };
     fetch("/create", {
       method: "POST",
       redirect: "follow",
@@ -208,7 +213,12 @@ const App = () => {
       });
   };
   const filtrarMateria = (filtro) => {
-    alert(filtro);
+    fetch(`/getQuestions/materia/${filtro}`)
+      .then((res) => res.json())
+      .then((preg) => {
+        console.log(preg);
+        return setQuestions(preg);
+      });
   };
 
   function Preguntas() {

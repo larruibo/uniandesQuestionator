@@ -12,28 +12,32 @@ const Answers = (props) => {
             <b>{props.username}</b> respondió:{" "}
           </p>
         </div>
-        <div className="input-group">
-          <div className="input-group-prepend">
-            <div className="input-group-text">
-              <label className="labelAnswer">
-                <input
-                  className="inputElement"
-                  type="radio"
-                  name="answer"
-                  value={a.answer}
-                  required={true}
-                />
-              </label>
-              <div className="answerElement">
-                <div className="row">
-                  <div className="col-10">
-                    <p>{a.answer}</p>
-                  </div>
-                  <div className="col-2">
-                    <p>
-                      <i class="fa fa-heart gold" />
-                      <span> {a.votes} likes </span>
-                    </p>
+        <div className="row">
+          <div className="col-9">
+            <p>{a.answer}</p>
+          </div>
+          <div className="col-3">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <div className="input-group-text">
+                  <label className="labelAnswer">
+                    <input
+                      className="inputElement"
+                      type="radio"
+                      name="answer"
+                      value={a.answer}
+                      required={true}
+                    />
+                  </label>
+                  <div className="answerElement">
+                    <div className="row">
+                      <div className="col-2">
+                        <p>
+                          <i class="fa fa-heart gold" />
+                          <span> {a.votes} likes </span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
