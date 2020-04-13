@@ -31,7 +31,7 @@ const Answers = (props) => {
                   </div>
                   <div className="col-2">
                     <p>
-                      <i class="fa fa-heart" />
+                      <i class="fa fa-heart gold" />
                       <span> {a.votes} likes </span>
                     </p>
                   </div>
@@ -53,6 +53,7 @@ const Answers = (props) => {
   console.log("answers", props.user);
   return (
     <div className="Answers">
+      <h3> Lo que otros compañeros han opinado: </h3>
       <form
         ref={formRef}
         onSubmit={onVote}
@@ -60,6 +61,9 @@ const Answers = (props) => {
         method="post"
       >
         {renderAnswers()}
+        <h4>
+          Puedes votar a la respuesta que consideras, resuelve la pregunta.{" "}
+        </h4>
         {props.user ? (
           <button type="sumbit" className="my-3 btn btn-primary">
             Vote

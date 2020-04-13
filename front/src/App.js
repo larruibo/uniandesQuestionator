@@ -228,9 +228,10 @@ const App = () => {
     findQuestion(id);
     console.log("Funciona coño", question);
     return (
-      <div key={"question" + id}>
+      <div key={"question" + id} className="pregunta-section">
         {question ? (
           <div>
+            <h2> Aquí está la pregunta: </h2>
             <div className="itemQuestion">
               <h3>{question.question}</h3>
               <p>

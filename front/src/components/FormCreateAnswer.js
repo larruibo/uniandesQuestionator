@@ -13,6 +13,7 @@ const FormCreateAnswer = (props) => {
   };
   return (
     <div className="FormCreateAnswer">
+      <h3> O bien, responder la pregunta: </h3>
       <form
         ref={formRef}
         onSumbit={goCreateAnswer}
