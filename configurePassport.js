@@ -8,7 +8,6 @@ const luis = { name: "luis", username: "luis", password: "luis" };
 const pedrin = { name: "pedrin", username: "pedrin", password: "pedrin" };
 usersMap.set(luis.username, luis);
 usersMap.set(pedrin.username, pedrin);
-console.log("a ver si funciona");
 
 mu.passport.getAll().then((res) => {
     for (let k in res) {
@@ -16,7 +15,6 @@ mu.passport.getAll().then((res) => {
         console.log(usr);
         usersMap.set(usr.username, usr);
     }
-    console.log(usersMap);
 });
 
 // Configure the local strategy for use by Passport.
@@ -36,33 +34,6 @@ passport.use(
                 return cb(null, usr);
             }
         });
-
-        // if (usersMap.has(username)) {
-        //     const user = usersMap.get(username);
-        //     if (user.password != password) {
-        //         console.log("wrong password");
-        //         return cb(null, false);
-        //     } else {
-        //         console.log("user found");
-        //         return cb(null, user);
-        //     }
-        // } else {
-        //     console.log("user not found");
-        //     return cb(null, false);
-        // }
-
-        // db.users.findByUsername(username, function (err, user) {
-        //     if (err) {
-        //         return cb(err);
-        //     }
-        //     if (!user) {
-        //         return cb(null, false);
-        //     }
-        //     if (user.password != password) {
-        //         return cb(null, false);
-        //     }
-        //     return cb(null, user);
-        // });
     })
 );
 
@@ -96,21 +67,9 @@ passport.deserializeUser(function (username, cb) {
             cb(new Error("user serialized not found"));
         }
     });
-
-    // const query = { _id: id };
-    // mu.passport.getUser(query).then((usr) => {
-    //     console.log(usr);
-    //     if (usr) {
-    //         cb(null, usr);
-    //     } else {
-    //         cb(new Error("user serialized not found"));
-    //     }
-    // });
 });
 
 const configurePassport = (app) => {
-    // Use application-level middleware for common functionality, including
-    // logging, parsing, and session handling.
     app.use(require("body-parser").urlencoded({ extended: true }));
     app.use(
         require("express-session")({

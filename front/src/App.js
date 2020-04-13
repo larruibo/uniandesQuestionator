@@ -15,22 +15,7 @@ import Answers from "./components/Answers.js";
 import FormCreateAnswer from "./components/FormCreateAnswer.js";
 import FormCreateUser from "./components/FormCreateUser.js";
 import Filtro from "./components/Filtro.js";
-let initialQuestions = [
-  // {
-  //   question: "Dummy?",
-  //   answers: [
-  //     { answer: "I'm dummy", votes: 10 },
-  //     { answer: "You're the dummy", votes: 2 },
-  //   ],
-  // },
-  // {
-  //   question: "Dummy Too?",
-  //   answers: [
-  //     { answer: "I'm dummy", votes: 10 },
-  //     { answer: "You're the dummy", votes: 2 },
-  //   ],
-  // },
-];
+let initialQuestions = [];
 
 const App = () => {
   const [questions, setQuestions] = useState(initialQuestions);
@@ -38,18 +23,10 @@ const App = () => {
   const [question, setQuestion] = useState(null);
 
   useEffect(() => {
+    console.log("get user");
     fetch("/getUser")
       .then((res) => res.json())
       .then((user) => setUser(user));
-  }, []);
-
-  useEffect(() => {
-    fetch("/getQuestions")
-      .then((res) => res.json())
-      .then((preg) => {
-        initialQuestions = preg;
-        return setQuestions(initialQuestions);
-      });
   }, []);
 
   const onCreateQuestion = (programa, materia, preg, descripcion) => {
@@ -153,8 +130,6 @@ const App = () => {
       body: JSON.stringify(usr),
     });
   };
-
-  const renderQuestions = (preguntas) => {};
 
   function Home() {
     return (
@@ -320,6 +295,7 @@ const App = () => {
         console.log(q);
         setQuestion(q);
       }
+      return true;
     });
   };
   function Pregunta() {

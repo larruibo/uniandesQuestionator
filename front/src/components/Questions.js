@@ -1,14 +1,7 @@
 import React from "react";
-//import PropTypes from "prop-types";
-import Answers from "./Answers.js";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
+import PropTypes from "prop-types";
+
+import { Link } from "react-router-dom";
 
 const Questions = (props) => {
   const renderQuestions = () => {
@@ -34,8 +27,8 @@ const Questions = (props) => {
   return <div className="Questions">{renderQuestions()}</div>;
 };
 
-// Questions.propTypes = {
-//   questions: PropTypes.array.isRequired
-// };
+Questions.propTypes = {
+  questions: PropTypes.array.isRequired,
+};
 
 export default Questions;
