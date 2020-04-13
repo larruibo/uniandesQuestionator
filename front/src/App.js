@@ -134,7 +134,7 @@ const App = () => {
   function Home() {
     return (
       <div className="">
-        <h2>Home</h2>
+        <h2>Bienvenidos a PreguntAndes</h2>
         <div className="row">
           <div className="col-12 col-lg-4 Home">
             <div className="Home-box">
