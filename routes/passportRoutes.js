@@ -2,7 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const mu = require("../db/MongoUtils.js");
 
-var router = express.Router();
+let router = express.Router();
 
 router.get("/login", function (req, res) {
     res.render("login");

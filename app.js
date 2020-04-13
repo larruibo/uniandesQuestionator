@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+<<<<<<< HEAD
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -12,6 +13,20 @@ const indexRouter = require("./routes/index");
 const passportRouter = require("./routes/passportRoutes.js");
 
 const app = express();
+=======
+let createError = require("http-errors");
+let express = require("express");
+let path = require("path");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
+
+const configurePassport = require("./configurePassport.js");
+
+let indexRouter = require("./routes/index");
+let passportRouter = require("./routes/passportRoutes.js");
+
+let app = express();
+>>>>>>> afaa1a5611184e48057cbda14fd4b1c146a74208
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
