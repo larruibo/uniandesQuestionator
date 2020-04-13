@@ -100,7 +100,7 @@ router.post("/:id/createAnswer", (req, res) => {
     for (let item in data) {
         if (item !== "_id") {
             registro[item] = data[item];
-            console.log(registro[item]);
+            console.log(registro[item], data[item]);
         }
     }
 

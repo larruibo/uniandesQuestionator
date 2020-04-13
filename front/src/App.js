@@ -100,7 +100,7 @@ const App = () => {
       const qObj = newQuestions.find((q) => q.question === question);
       const newAnswers = qObj.answers.map((a) =>
         a.answer === answer
-          ? { answer: a.answer, votes: a.votes + 1, user: user.username }
+          ? { answer: a.answer, votes: a.votes + 1, username: user.username }
           : a
       );
       qObj.answers = newAnswers;
