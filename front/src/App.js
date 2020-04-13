@@ -69,8 +69,10 @@ const App = () => {
       .then((res) => res.json())
       .then((pregu) => {
         console.log(pregu);
-        window.location = `/preguntas/${pregu[0]._id}`;
-        window.location.href = `/preguntas/${pregu[0]._id}`;
+        // window.location = `/preguntas/${pregu[0]._id}`;
+        // window.location.href = `/preguntas/${pregu[0]._id}`;
+        window.location = "/";
+        window.location.href = "/";
         return setQuestion(pregu[0]);
       });
   };
@@ -133,8 +135,10 @@ const App = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.ok) {
-          window.location = `/iniciarsesion`;
-          window.location.href = `/iniciarsesion`;
+          // window.location = `/iniciarsesion`;
+          // window.location.href = `/iniciarsesion`;
+          window.location = "/";
+          window.location.href = "/";
         } else {
           alert("error");
         }

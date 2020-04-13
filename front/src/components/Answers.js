@@ -9,7 +9,7 @@ const Answers = (props) => {
       <div className="itemAnswer" key={"answer" + a + props.question + i}>
         <div>
           <p>
-            <b>{props.username}</b> respondió:{" "}
+            <b>{a.username}</b> respondió:{" "}
           </p>
         </div>
         <div className="row">
