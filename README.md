@@ -2,6 +2,8 @@
 
 UniandesQuestionator es una pagina web que tiene como finalidad que las personas realicen sus preguntas de las materias en donde tengan dudas/problemas y obtengan respuesta por otros miembros de la comunidad. Así, entre todos podemos ayudarnos.
 
+![imagen](https://raw.githubusercontent.com/larruibo/uniandesQuestionator/master/screen.png)
+
 ------------------------------------------------------------------------------
 # Correr la pagina Web Localmente
 Para correr la aplicacion localmente se necesita tener instalados estos complementos.
