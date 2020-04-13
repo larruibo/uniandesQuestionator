@@ -157,7 +157,54 @@ const App = () => {
   const renderQuestions = (preguntas) => {};
 
   function Home() {
-    return <h2>Home</h2>;
+    return (
+      <div className="">
+        <h2>Home</h2>
+        <div className="row">
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-question-circle"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  PreguntAndes es una herramienta que te permite hacer preguntas
+                  sobre materias específicas de tu carrera. De la misma forma,
+                  permite que entre estudiantes nos colaboremos.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-search"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  Puedes ver y filtrar las preguntas siempre. Si quieres una
+                  experiencia más completa, Inicia Sesión o Regístrate para
+                  poder hacer preguntas, responder y votar.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-users"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  Surgimos como una alternativa a la virtualización. Pasa la voz
+                  para que nos ayudemos en comunidad.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   function About() {
@@ -348,11 +395,6 @@ const App = () => {
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" to="/about">
-                            About
-                          </Link>
-                        </li>
-                        <li className="nav-item">
                           <Link className="nav-link" to="/preguntas">
                             Preguntas
                           </Link>
@@ -382,9 +424,6 @@ const App = () => {
               </nav>
               <div className="contenido">
                 <Switch>
-                  <Route path="/about">
-                    <About />
-                  </Route>
                   <Route path="/preguntas">
                     <Preguntas />
                   </Route>
