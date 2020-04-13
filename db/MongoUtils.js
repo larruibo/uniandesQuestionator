@@ -2,18 +2,16 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
     const mu = {},
-        // hostname = process.env.DB_HOST,
-        //port = process.env.DB_PORT,
-        dbName = "cantar",
-        colName = "usuatrio";
+        hostname = process.env.DB_HOST,
+        port = process.env.DB_PORT,
+        dbName = process.env.DB_NAME,
+        colName = process.env.DB_COL;
 
     //Connection to db
     mu.connect = () => {
-        //  const uri = process.env.MONGO_DB_ATLAS;
-        //const url = `mongodb://${hostname}:${port}`;
-        const client = new MongoClient("mongodb://localhost:27017", {
-            useUnifiedTopology: true,
-        });
+        const uri = process.env.MONGO_DB_ATLAS;
+        const url = `mongodb://${hostname}:${port}`;
+        const client = new MongoClient(uri, { useUnifiedTopology: true });
         console.log("Connecting");
         return client.connect();
     };
