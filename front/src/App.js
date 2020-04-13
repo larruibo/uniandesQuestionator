@@ -13,6 +13,7 @@ import FormCreateQuestion from "./components/FormCreateQuestion.js";
 import Login from "./components/Login.js";
 import Answers from "./components/Answers.js";
 import FormCreateAnswer from "./components/FormCreateAnswer.js";
+import FormCreateUser from "./components/FormCreateUser.js";
 let initialQuestions = [
   // {
   //   question: "Dummy?",
@@ -134,6 +135,15 @@ const App = () => {
       });
   };
 
+  const onRegister = (username, password, name) => {
+    const usr = { username: username, password: password, name: name };
+    fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usr),
+    });
+  };
+
   const renderQuestions = (preguntas) => {};
 
   function Home() {
@@ -157,7 +167,16 @@ const App = () => {
     return (
       <div>
         {!user ? (
-          <Login onLogin={onLogin} />
+          <div className="row">
+            <div className="col-6">
+              <h2> Inicia Sesión: </h2>
+              <Login onLogin={onLogin} />
+            </div>
+            <div className="col-6">
+              <h2> Regístrate: </h2>
+              <FormCreateUser onRegister={onRegister} />
+            </div>
+          </div>
         ) : (
           <div>
             <div>
@@ -314,7 +333,7 @@ const App = () => {
                           {!user ? (
                             <Link className="nav-link" to="/iniciarsesion">
                               {" "}
-                              Iniciar Sesión{" "}
+                              Iniciar Sesión / Registro{" "}
                             </Link>
                           ) : (
                             <Link className="nav-link" to="/iniciarsesion">

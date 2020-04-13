@@ -61,6 +61,43 @@ function MongoUtils() {
             return algoCol.updateOne(algo, nuevo).finally(() => client.close());
         });
 
+    mu.passport = {};
+
+    mu.passport.register = (user) =>
+        mu.connect().then((client) => {
+            console.log("back ", user);
+            const newUser = client.db(dbName).collection("users");
+            return newUser.insertOne(user).finally(() => client.close());
+        });
+
+    mu.passport.getUser = (username, password) =>
+        mu.connect().then((client) => {
+            const findUser = client.db(dbName).collection("users");
+            const query = { username: username, password: password };
+            return findUser.findOne(query).finally(() => client.close());
+        });
+
+    mu.passport.findLast = (query) =>
+        mu.connect().then((client) => {
+            const reportesCol = client.db(dbName).collection("users");
+            return reportesCol
+                .find(query)
+                .limit(1)
+                .sort({ _id: -1 })
+                .toArray()
+                .finally(() => client.close());
+        });
+
+    mu.passport.getAll = () =>
+        mu.connect().then((client) => {
+            const reportesCol = client.db(dbName).collection("users");
+            return reportesCol
+                .find()
+                .sort({ timestamp: -1 })
+                .toArray()
+                .finally(() => client.close());
+        });
+
     return mu;
 }
 

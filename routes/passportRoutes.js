@@ -1,10 +1,20 @@
 const express = require("express");
 const passport = require("passport");
+const mu = require("../db/MongoUtils.js");
 
 var router = express.Router();
 
 router.get("/login", function (req, res) {
     res.render("login");
+});
+
+router.post("/register", function (req, res) {
+    const username = req.body.username;
+    const name = req.body.name;
+    const password = req.body.password;
+    const usr = { username: username, password: password, name: name };
+    console.log(usr);
+    mu.passport.register(usr).then(res.redirect("/"));
 });
 
 router.post(

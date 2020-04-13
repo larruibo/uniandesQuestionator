@@ -1,10 +1,23 @@
 var passport = require("passport");
 var Strategy = require("passport-local").Strategy;
+const mu = require("./db/MongoUtils.js");
 
-const usersMap = new Map();
+let usersMap = new Map();
 
-const luis = { id: "luis", username: "luis", password: "luis" };
+const luis = { name: "luis", username: "luis", password: "luis" };
+const pedrin = { name: "pedrin", username: "pedrin", password: "pedrin" };
 usersMap.set(luis.username, luis);
+usersMap.set(pedrin.username, pedrin);
+console.log("a ver si funciona");
+
+mu.passport.getAll().then((res) => {
+    for (let k in res) {
+        let usr = res[k];
+        console.log(usr);
+        usersMap.set(usr.username, usr);
+    }
+    console.log(usersMap);
+});
 
 // Configure the local strategy for use by Passport.
 //
@@ -15,20 +28,28 @@ usersMap.set(luis.username, luis);
 passport.use(
     new Strategy(function (username, password, cb) {
         console.log("Strategy", username, password);
-
-        if (usersMap.has(username)) {
-            const user = usersMap.get(username);
-            if (user.password != password) {
-                console.log("wrong password");
+        mu.passport.getUser(username, password).then((usr) => {
+            console.log(usr);
+            if (!usr) {
                 return cb(null, false);
             } else {
-                console.log("user found");
-                return cb(null, user);
+                return cb(null, usr);
             }
-        } else {
-            console.log("user not found");
-            return cb(null, false);
-        }
+        });
+
+        // if (usersMap.has(username)) {
+        //     const user = usersMap.get(username);
+        //     if (user.password != password) {
+        //         console.log("wrong password");
+        //         return cb(null, false);
+        //     } else {
+        //         console.log("user found");
+        //         return cb(null, user);
+        //     }
+        // } else {
+        //     console.log("user not found");
+        //     return cb(null, false);
+        // }
 
         // db.users.findByUsername(username, function (err, user) {
         //     if (err) {
@@ -56,17 +77,34 @@ passport.serializeUser(function (user, cb) {
     cb(null, user.username);
 });
 
+const fillMap = () => {
+    return mu.passport.getAll().then((res) => {
+        for (let k in res) {
+            let usr = res[k];
+            console.log(usr);
+            if (!usersMap.has(usr.username)) usersMap.set(usr.username, usr);
+        }
+        console.log(usersMap);
+    });
+};
+
 passport.deserializeUser(function (username, cb) {
-    if (usersMap.has(username)) {
-        cb(null, usersMap.get(username));
-    } else {
-        cb(new Error("user serialized not found"));
-    }
-    // db.users.findById(id, function (err, user) {
-    //     if (err) {
-    //         return cb(err);
+    fillMap().then(() => {
+        if (usersMap.has(username)) {
+            cb(null, usersMap.get(username));
+        } else {
+            cb(new Error("user serialized not found"));
+        }
+    });
+
+    // const query = { _id: id };
+    // mu.passport.getUser(query).then((usr) => {
+    //     console.log(usr);
+    //     if (usr) {
+    //         cb(null, usr);
+    //     } else {
+    //         cb(new Error("user serialized not found"));
     //     }
-    //     cb(null, user);
     // });
 });
 
