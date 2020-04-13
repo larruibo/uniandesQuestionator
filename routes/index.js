@@ -4,7 +4,8 @@ const mu = require("../db/MongoUtils.js");
 ObjectId = require("mongodb").ObjectID;
 
 /* GET home page. */
-router.get("/test", function (req, res, next) {
+router.get("/", function (req, res, next) {
+    console.log("test");
     res.render("home", { user: req.user });
 });
 
