@@ -1,5 +1,5 @@
-var passport = require("passport");
-var Strategy = require("passport-local").Strategy;
+let passport = require("passport");
+let Strategy = require("passport-local").Strategy;
 const mu = require("./db/MongoUtils.js");
 
 let usersMap = new Map();
