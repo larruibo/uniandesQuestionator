@@ -23,7 +23,7 @@ Y ya se tiene corriendo localmente la base de datos.
 
 
 ### Variables de entorno
-Se necesita crear un .env en la carpeta raiz del proyecto y se debe agregar direccion completa de la base de datos de la siguiente forma: MONGO_DB_ATLAS=direccion.
+Se necesita crear un .env en la carpeta raiz del proyecto y se debe agregar direccion completa de la base de datos de la siguiente forma: MONGO_DB_ATLAS=direccion con colecciones :
 
 --------------------------------------------------------------------------------------------------
 ## Start
