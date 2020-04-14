@@ -206,7 +206,10 @@ const App = () => {
             </div>
             <div className="col-6">
               <h2> Regístrate: </h2>
-              <FormCreateUser onRegister={onRegister} />
+      //Commentario podrían pasar el setUser como props, para cambiar el estado y que se logee 
+      //automáticamente en vez de uno registrarse y luego tener que logearse
+      
+              <FormCreateUser setUser={setUser} />
             </div>
           </div>
         ) : (
