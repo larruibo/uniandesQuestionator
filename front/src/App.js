@@ -29,6 +29,12 @@ const App = () => {
       .then((user) => setUser(user));
   }, []);
 
+  useEffect(() => {
+    fetch("/getQuestions")
+      .then((res) => res.json())
+      .then((ques) => setQuestions(ques));
+  }, []);
+
   const onCreateQuestion = (programa, materia, preg, descripcion) => {
     console.log("dentro de onCreate", programa, materia, preg, descripcion);
     const preguntita = {
